@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Popular Movies</h2>
+  
+    <!-- Movie Cards Grid -->
+    <div class="row">
+    @for (movie of movies; track $index) {
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <!-- Movie Card -->
+        <mat-card class="movie-card h-100">
+        @if(movie?.backdropPath){
+            <img
+                [src]="movie.backdropPath"
+                alt="{{ movie.title }} Poster"
+                class="card-img-top img-fluid"
+                style="max-height: 300px; object-fit: cover;"
+            />
+        }
+          <mat-card-content>
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text text-truncate" style="max-height: 50px;">
+              {{ movie.overview }}
+            </p>
+            <p><strong>Release Date:</strong> {{ movie.releaseDate | date: 'longDate' }}</p>
+            <p><strong>Rating:</strong> {{ movie.voteAverage | number: '1.1-1' }} / 10</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <a
+              [routerLink]="['/movies', movie.id]"
+              mat-button
+              color="primary"
+              class="btn btn-sm btn-primary w-100"
+              >View Details</a
+            >
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    }
+    </div>
+  </div>
+  

@@ -1,0 +1,58 @@
+<div class="container mt-4">
+    <!-- Movie Header Section -->
+    <div class="row">
+      <div class="col-md-4 text-center">
+        @if(movie?.backdropPath){
+        <img
+          [src]="movie?.backdropPath"
+          alt="{{ movie?.title }} Logo"
+          class="img-fluid rounded mb-3"
+          style="max-height: 200px;"
+        />
+      }
+      </div>
+      <div class="col-md-8">
+        <h1 class="display-4">{{ movie?.title }}</h1>
+        <p class="lead">{{ movie?.overview }}</p>
+        <p><strong>Release Date:</strong> {{ movie?.releaseDate | date: 'longDate' }}</p>
+        <p><strong>Rating:</strong> {{ movie?.voteAverage | number: '1.1-1' }} / 10</p>
+      </div>
+    </div>
+  
+    <!-- Movie Additional Details Section -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <h4>Genres</h4>
+        @for (genre of movie?.genres; track $index) {
+        <span class="badge bg-primary me-1 mb-2">
+          {{ genre.name }}
+          </span>
+        }
+      </div>
+    </div>
+  
+    <!-- Button to Add to Offline List -->
+    <div class="row mt-4">
+      <div class="col text-center">
+        <button
+          mat-raised-button
+          color="accent"
+          class="btn btn-primary btn-lg"
+          (click)="addToOfflineList()"
+        >
+          Add to Offline List
+        </button>
+      </div>
+    </div>
+  
+    <!-- Additional Information: Full-Width Section -->
+    <div class="row mt-5">
+      <div class="col">
+        <h4>Additional Information</h4>
+        <p><strong>Budget:</strong> {{ movie?.budget | currency }}</p>
+        <p><strong>Revenue:</strong> {{ movie?.revenue | currency }}</p>
+        <p><strong>Runtime:</strong> {{ movie?.runtime }} minutes</p>
+      </div>
+    </div>
+  </div>
+  
